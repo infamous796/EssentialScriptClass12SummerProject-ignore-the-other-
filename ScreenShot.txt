@@ -1,0 +1,16 @@
+from PIL import Image
+import numpy as np 
+import cv2
+png = Image.open('NewCroppedImage.png')
+png.show()
+png.load() # required for png.split()
+
+background = Image.new("RGB", png.size, (255, 255, 255))
+background.paste(png, mask=png.split()[3]) # 3 is the alpha channel
+
+background.save('foo.jpg', 'JPEG', quality=80)
+photo = Image.open("foo.jpg")
+wb = Image.open("WhiteBackground.jpg")
+wb.paste(photo)
+wb.save("Pasted.jpg")
+

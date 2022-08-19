@@ -1,0 +1,29 @@
+from PIL import Image
+from cvzone.ClassificationModule import Classifier
+import cv2
+#cap = cv2.VideoCapture(0)
+labels = ["Cello Finegrip Ball Pen","ClassMate 30x21 Notebook","Fancy School Pouch"]
+myClassifier = Classifier("keras_model.h5","labels.txt")
+#_, img = cap.read()
+#gray_img = cv2.imread("NewCroppedImage.png", cv2.IMREAD_UNCHANGED)
+#img = cv2.cvtColor(gray_img, cv2.COLOR_RGB2BGRA)
+#cv2.imshow("image",gray_img)
+#cv2.waitKey(2)
+"""
+#Automated BG Removal Code
+img1 = Image.open(r"WhiteBackground.png")
+img2 = Image.open(r"NewCroppedImage.png", cv2,IMREAD_UNCHANGED)
+img1.paste(img2,(320,120))
+img1.show()
+img1.save("AutomatedBGRemoval.jpg")
+"""
+img = cv2.imread("Pasted.jpg")
+#img = cv2.imread("NewCroppedImage.png",cv2.IMREAD_UNCHANGED)
+
+cv2.imshow("image",img)
+cv2.waitKey(0)
+
+predictions = myClassifier.getPrediction(img)
+index = predictions[1]
+result = labels[index]
+print(result)
